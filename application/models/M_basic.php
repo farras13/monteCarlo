@@ -31,6 +31,30 @@ class M_basic extends CI_Model {
         $this->db->delete($t, $w);
     }
 
+	public function dashboard()
+	{
+		return $this->db->query("SELECT tanggal, sum(jumlah) as total FROM `penjualan` GROUP BY tanggal ORDER BY tanggal");
+	}
+
+	public function max()
+	{
+		return $this->db->query("SELECT tanggal, sum(jumlah) as total FROM `penjualan` GROUP BY tanggal ORDER BY total desc");
+	}
+
+	public function avg()
+	{
+		return $this->db->query("SELECT AVG(jumlah) as rerata FROM `penjualan` JOIN barang on barang.id_brg = penjualan.id_barang");
+	}
+
+	public function total()
+	{
+		return $this->db->query("SELECT sum(jumlah) as total FROM `penjualan`");
+	}
+
+	public function dashboardd()
+	{
+		return $this->db->query("SELECT tanggal, sum(jumlah) as total FROM `penjualan` where DATE(tanggal) = CURDATE() GROUP BY tanggal");
+	}
 }
 
 /* End of file M_basic.php */

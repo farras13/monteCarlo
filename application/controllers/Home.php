@@ -12,7 +12,10 @@ class Home extends CI_Controller {
 
     public function index()
     {
-        $data['data'] = $this->mp->getData('penjualan')->result();
+        $data['data'] = $this->mp->dashboard()->result_array();
+        $data['maks'] = $this->mp->max()->result();
+		$data['avg'] = $this->mp->avg()->row() ;
+        $data['dataa'] = $this->mp->dashboardd()->result_array();
         $this->load->view('template/header');
         $this->load->view('index', $data);
         $this->load->view('template/footer');
